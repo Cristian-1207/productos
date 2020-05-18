@@ -39,9 +39,19 @@ class Ui {
                 ${this.manager.showProducts()[i].name}</td>
                 <td>${this.manager.showProducts()[i].description}</td>
                 <td>${this.manager.showProducts()[i].quantity}</td>
+                <td><button id='${i}'>Eliminar</button></td>
             </tr>`;
         }
         this.container.innerHTML = html;
+        this.loadDeleteEvents();
+    }
+    loadDeleteEvents(){
+        for(let i=0;i<this.manager.showProducts().length;i++){
+            document.getElementById(`${i}`).addEventListener('click',(e)=>{
+                this.manager.removeProducts(this.manager.showProducts()[i]);
+                this.loadTable();
+            })
+        }
     }
     addProducts(name, description, quantity) {
         let p1 = new Products(name, description, quantity);
